@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚡БЫСТРЫЙ РЕСПАВН | ЧИТЕРСКИЙ БИНД | BIND ⚡</title>
+    <title>⚡БЫСТРЫЙ РЕСПАВН BIND</title>
     <style>
         * {
             margin: 0;
@@ -151,7 +151,7 @@
             letter-spacing: 1px;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
-            margin-top: 10px;
+            margin-bottom: 40px; /* Отступ до инструкции */
         }
 
         .copy-btn:hover {
@@ -168,11 +168,87 @@
             box-shadow: 0 4px 15px rgba(0, 170, 255, 0.3);
         }
 
-        /* Иконка копирования */
         .copy-icon {
             width: 18px;
             height: 18px;
             fill: currentColor;
+        }
+
+        /* ========================================== */
+        /* НОВЫЙ БЛОК: ИНСТРУКЦИЯ */
+        /* ========================================== */
+        .instruction-box {
+            background: rgba(0, 170, 255, 0.05);
+            border: 1px solid rgba(0, 170, 255, 0.3);
+            border-radius: 16px;
+            padding: 25px 30px;
+            margin: 0 auto;
+            max-width: 600px;
+            text-align: left;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(0, 170, 255, 0.1);
+        }
+
+        .instruction-title {
+            color: #00aaff;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .instruction-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            counter-reset: step-counter;
+        }
+
+        .instruction-list li {
+            position: relative;
+            padding-left: 40px;
+            margin-bottom: 16px;
+            color: #cfd6ea;
+            font-size: 15px;
+            line-height: 1.5;
+            counter-increment: step-counter;
+        }
+
+        .instruction-list li:last-child {
+            margin-bottom: 0;
+            color: #00ff88; /* Последний шаг зеленый для позитивного финала */
+            font-weight: 600;
+        }
+
+        .instruction-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 26px;
+            height: 26px;
+            background: linear-gradient(135deg, #00aaff, #0088cc);
+            color: #fff;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 26px;
+            font-size: 14px;
+            font-weight: 700;
+            box-shadow: 0 2px 8px rgba(0, 170, 255, 0.4);
+        }
+
+        .instruction-list li strong {
+            color: #ffffff;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
         }
 
         /* Уведомление */
@@ -227,13 +303,18 @@
                 padding: 30px 15px;
             }
 
-            .code-box {
+            .code-box, .instruction-box {
                 padding: 20px 15px;
             }
 
             .copy-btn {
                 padding: 12px 24px;
                 font-size: 14px;
+            }
+
+            .instruction-list li {
+                font-size: 14px;
+                padding-left: 35px;
             }
         }
     </style>
@@ -245,7 +326,7 @@
 
     <div class="container">
         <!-- Главный заголовок -->
-        <h1 class="main-title">⚡БЫСТРЫЙ РЕСПАВН<br>ЧИТЕРСКИЙ БИНД</h1>
+        <h1 class="main-title">⚡БЫСТРЫЙ РЕСПАВН<br>ЧИТЕРСКИЙ БИНД | BIND ⚡</h1>
 
         <!-- Подзаголовок -->
         <p class="subtitle">Спасибо за <span>покупку</span>!</p>
@@ -254,8 +335,7 @@
         <div class="code-box">
             <div class="code-label">Твой бинд</div>
             <div class="code-content" id="bindCode">
-                <!-- ЗАМЕНИ ЭТОТ ТЕКСТ НА СВОЙ БИНД -->
-                bind [rightshift+l] "kill;respawn_sleepingbag id"
+                bind [rightcntrl + z] "kill;respawn_sleepingbag ID"
             </div>
         </div>
 
@@ -266,6 +346,17 @@
             </svg>
             Скопировать
         </button>
+
+        <!-- НОВЫЙ БЛОК: Инструкция -->
+        <div class="instruction-box">
+            <h3 class="instruction-title">📖 Как установить:</h3>
+            <ol class="instruction-list">
+                <li> [rightcntrl + z] <strong>сочетание</strong> клавиш <strong>для </strong> бинда !<strong> ID </strong></li>
+                <li> нужно <strong>~</strong> заменить на id спальника </li>
+                <li>как получить id спальника?(<strong>!ударте спальник</strong> в консоле пропиши combatlog</li>
+                <li>там скопируй ид<strong>Enter</strong>. Готово!🚀</li>
+            </ol>
+        </div>
     </div>
 
     <!-- Уведомление о копировании -->
@@ -277,9 +368,7 @@
             const btn = document.getElementById('copyBtn');
             const toast = document.getElementById('toast');
 
-            // Копирование в буфер обмена
             navigator.clipboard.writeText(code).then(() => {
-                // Меняем текст кнопки
                 btn.classList.add('copied');
                 btn.innerHTML = `
                     <svg class="copy-icon" viewBox="0 0 24 24">
@@ -288,10 +377,8 @@
                     Скопировано!
                 `;
 
-                // Показываем уведомление
                 toast.classList.add('show');
 
-                // Возвращаем всё обратно через 2 секунды
                 setTimeout(() => {
                     btn.classList.remove('copied');
                     btn.innerHTML = `
@@ -303,7 +390,6 @@
                     toast.classList.remove('show');
                 }, 2000);
             }).catch(err => {
-                // Fallback для старых браузеров
                 const textArea = document.createElement('textarea');
                 textArea.value = code;
                 document.body.appendChild(textArea);
@@ -317,7 +403,6 @@
             });
         }
 
-        // Копирование по клику на блок с кодом
         document.getElementById('bindCode').addEventListener('click', copyCode);
     </script>
 </body>
